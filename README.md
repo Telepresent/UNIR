@@ -6,6 +6,37 @@ El flujo de personas en la ciudad es objeto de un creciente interés por parte d
 
 
 
+* Descarga datos de flujo de personas en Melbourne de uno o varios meses en formato .csv (o se los puedo proporcionar yo mismo ya descargados).
+
+* El sistema de monitorización de flujo de personas, se inicia como un proyecto piloto en el centro de la ciudad y se espera escalarlo a toda la ciudad (4,9 millones de habitantes). Explica las ventajas o desventajas de utilizar una base de datos SQL/NoSQL para ello. 
+
+* Importa los datos .csv a MongoDB (puedes utilizar la interfaz gráfica Studio 3T que veremos en clase).
+
+* Lanza las queries necesarias para determinar (tengo que ver para calibrar la dificultad):
+
+-¿En qué calle situarías un negocio que abre todos los días de 10:00h a 21:00h?
+
+-La zona con menor flujo medio de personas para implementar medidas que potencien la zona. 
+
+-…
+
+* •	Una de las aplicaciones interesantes puede ser analizar el impacto económico de los eventos deportivos en una ciudad (ej. impacto partidos del Athletic en Bilbao https://www.tactizity.com/bilbao, https://reunir.unir.net/handle/123456789/6961 ) o hacer una previsión de la demanda de taxis http://www.smartaxi.me/ entre otras. ¿Qué aplicación se te ocurre que resultaría de interés para tu ciudad?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Firmware del robot para Microbit
 
 El firmware del robot para la tarjeta Microbit se ha desarrollado en lenguaje MicroPyhon. A continuación se describen algunos puntos clave del código. 
@@ -20,28 +51,6 @@ Run `ionic cordova run android`
 
 Para ver si él móvil está conectado, ejecutar
 Run `adb devices`
-
-
-* •	Descarga datos de flujo de personas en Melbourne de uno o varios meses en formato .csv (o se los puedo proporcionar yo mismo ya descargados).
-
-* •	El sistema de monitorización de flujo de personas, se inicia como un proyecto piloto en el centro de la ciudad y se espera escalarlo a toda la ciudad (4,9 millones de habitantes). Explica las ventajas o desventajas de utilizar una base de datos SQL/NoSQL para ello. 
-
-* •	Importa los datos .csv a MongoDB (puedes utilizar la interfaz gráfica Studio 3T que veremos en clase).
-
-* •	Lanza las queries necesarias para determinar (tengo que ver para calibrar la dificultad):
-
--¿En qué calle situarías un negocio que abre todos los días de 10:00h a 21:00h?
-
--La zona con menor flujo medio de personas para implementar medidas que potencien la zona. 
-
--…
-
-* •	Una de las aplicaciones interesantes puede ser analizar el impacto económico de los eventos deportivos en una ciudad (ej. impacto partidos del Athletic en Bilbao https://www.tactizity.com/bilbao, https://reunir.unir.net/handle/123456789/6961 ) o hacer una previsión de la demanda de taxis http://www.smartaxi.me/ entre otras. ¿Qué aplicación se te ocurre que resultaría de interés para tu ciudad?
-
-
-
-* .env.prod
-* .env.dev
 
 # Backend
 
