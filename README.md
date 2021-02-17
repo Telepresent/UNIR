@@ -1,6 +1,6 @@
 # Proyecto FINTECH UNIR
 
-Este proyecto desarrolla el proceso de desarrollo y fabricación industrial de un robot de telepresencia para las personas mayores y estudiantes enfermos que no pueden interactuar con sus amigos. Consiste en que el robot se coloca sobre una mesa y el usuario puede utilizar el robot por control remoto desde su casa/residencia/hospital. Permite ver y hablar, levantar la mano y mover el robot. Además, este robot de telepresencia incluye un sensor de CO2, temperatura y humedad que permite evaluar la necesidad de ventilar.  
+El flujo de personas en la ciudad es objeto de un creciente interés por parte de empresas y administraciones. Esto se debe a que las dinámicas de la ciudad inciden en su economía. Por ejemplo, las cadenas comerciales, querrán abrir nuevos establecimientos en aquellos emplazamientos que presenten un mayor flujo de personas con perfil de potenciales clientes. Así mismo, la dinámica de las ciudades influye en la movilidad (ej demanda de taxi, Uber…) o la necesidad de infraestructuras e inversiones públicas entre otras cuestiones. La ciudad de Melbourne en Australia dispone de un sistema de aforamiento con datos abiertos http://www.pedestrian.melbourne.vic.gov.au/ que utilizaremos para la siguiente actividad.  
 
 [![VIDEO ROBOT](img/1.jpg)](https://www.youtube.com/watch?v=9LAC98Wxa0o)
 
