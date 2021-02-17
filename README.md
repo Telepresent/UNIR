@@ -49,7 +49,8 @@ El comando a ejecutar para importar el documento .csv es:
 3.	Ya tenemos los datos en MongoDB, pero no están en el orden en el que nos gustaría en MongoDB. Podemos ordenarlos con el siguiente script. 
 
 
-`function getDateStats(d, format = "", separator = "-", utc = false) {
+```javascript
+function getDateStats(d, format = "", separator = "-", utc = false) {
     // print(d);
     if(d == undefined){
         return null;
@@ -110,7 +111,8 @@ db.personas.find({})
        p.date = getDateStats(p.Date,'mmddyy','/', false);
        p.iso_date = new Date(p.Date);
        db.personas.save(p);
-   });`
+   });
+   ```
 
 
 4.	Para facilitar la tarea proporciono los datos ya ordenados en el fichero Output.json. Lo importamos desde el terminal de Windows.
