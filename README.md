@@ -23,18 +23,6 @@ El flujo de personas en la ciudad es objeto de un creciente interés por parte d
 * Una de las aplicaciones interesantes puede ser analizar el impacto económico de los eventos deportivos en una ciudad (ej. impacto partidos del Athletic en Bilbao https://www.tactizity.com/bilbao, https://reunir.unir.net/handle/123456789/6961 ) o hacer una previsión de la demanda de taxis http://www.smartaxi.me/ entre otras. ¿Qué aplicación se te ocurre que resultaría de interés para tu ciudad?
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 # SOLUCIÓN:
 
 1.	En primer lugar tenemos que obtener los datos de flujo de personas con los que vamos a trabajar. Son los datos de enero a diciembre de 2017 y se pueden descargar de la web de la ciudad de Melbourne http://www.pedestrian.melbourne.vic.gov.au/
@@ -215,6 +203,8 @@ db.personas.aggregate([
 
 print(result);
  ```
+# Query 1 Buscar la zona en la que colocaríamos una tienda. 
+La mejor zona es SOUTHBANK. https://public.tableau.com/views/Flujopersonas/Dashboard1?:language=es&:display_count=y&publish=yes?:showVizHome=no#1
 
 [![MELBOURNE](images/solucion.jpg)](https://public.tableau.com/views/Flujopersonas/Dashboard1?:language=es&:display_count=y&publish=yes?:showVizHome=no#1)
 
