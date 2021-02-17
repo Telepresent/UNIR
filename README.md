@@ -43,7 +43,7 @@ El flujo de personas en la ciudad es objeto de un creciente interés por parte d
 
 El comando a ejecutar para importar el documento .csv es: 
 
-< mongoimport --db test --collection personas --type csv --file Result.csv --headerline
+```mongoimport --db test --collection personas --type csv --file Result.csv --headerline```
 
 
 3.	Ya tenemos los datos en MongoDB, pero no están en el orden en el que nos gustaría en MongoDB. Podemos ordenarlos con el siguiente script. 
@@ -117,25 +117,106 @@ db.personas.find({})
 
 4.	Para facilitar la tarea proporciono los datos ya ordenados en el fichero Output.json. Lo importamos desde el terminal de Windows.
 
-< mongoimport –db test –collection personas < output.json
+```mongoimport –db test –collection personas < output.json```
 
 5.	Ahora ya temenos los datos ordenados en MongoDB y podemos lanzar una Query que nos muestre para cada día, la calle en la que ha habido más peatones entre las 10:00h y las 21:00h. Se proporciona la salida en el archivo “Respuesta.csv”. Si analizamos los datos, nos damos cuenta de que en 193 días del año, la zona en la que transitan más personas es SOUTHBANK. Por tanto, es esta la zona en la que por mayor flujo de personas, situaríamos nuestro negocio.  Para ver los datos de manera gráfica y ver que SOUTHBANK se corresponde con la zona más bulliciosa de negocios de Melbourne, he creado el siguiente mapa que podéis consultar pulsando en el enlace. 
 
 
+ ```Javascript
+// variable that will hold final result
+var result = []; 
+
+// Started aggregation pipeline
+db.personas.aggregate([
+    {							// match clause for hour check greater than equal to 10 and less than 21
+        $match: {
+            "Hour": { '$gte': 10, '$lte': 21 }
+        }
+    },
+    {
+        $group: {
+            "_id": { day: '$date.day', month: "$date.month", year: '$date.year' }, // group data by day,month and year
+            'State Library': { $avg: '$State Library' },			   // Add each street average value	
+            'Collins Place (South)': { $avg: '$Collins Place (South)' },
+            'Collins Place (North)': { $avg: '$Collins Place (North)' },
+            'Flagstaff Station': { $avg: '$Flagstaff Station' },
+            'Melbourne Central': { $avg: '$Melbourne Central' },
+            'Town Hall (West)': { $avg: '$Town Hall (West)' },
+            'Bourke Street Mall (North)': { $avg: '$Bourke Street Mall (North)' },
+            'Bourke Street Mall (South)': { $avg: '$Bourke Street Mall (South)' },
+            'Australia on Collins': { $avg: '$Australia on Collins' },
+            'Southern Cross Station': { $avg: '$Southern Cross Station' },
+            'Victoria Point': { $avg: '$Victoria Point' },
+            'New Quay': { $avg: '$New Quay' },
+            'Waterfront City': { $avg: '$Waterfront City' },
+            'Webb Bridge': { $avg: '$Webb Bridge' },
+            'Princes Bridge': { $avg: '$Princes Bridge' },
+            'Flinders St Station Underpass': { $avg: '$Flinders St Station Underpass' },
+            'Sandridge Bridge': { $avg: '$Sandridge Bridge' },
+            'Birrarung Marr': { $avg: '$Birrarung Marr' },
+            'QV Market-Elizabeth (West)': { $avg: '$QV Market-Elizabeth (West)' },
+            'Flinders St-Elizabeth St (East)': { $avg: '$Flinders St-Elizabeth St (East)' },
+            'Spencer St-Collins St (North)': { $avg: '$Spencer St-Collins St (North)' },
+            'Spencer St-Collins St (South)': { $avg: '$Spencer St-Collins St (South)' },
+            'Bourke St-Russell St (West)': { $avg: '$Bourke St-Russell St (West)' },
+            'Convention/Exhibition Centre': { $avg: '$Convention/Exhibition Centre' },
+            'Chinatown-Swanston St (North)': { $avg: '$Chinatown-Swanston St (North)' },
+            'Chinatown-Lt Bourke St (South)': { $avg: '$Chinatown-Lt Bourke St (South)' },
+            'QV Market-Peel St': { $avg: '$QV Market-Peel St' },
+            'Vic Arts Centre': { $avg: '$Vic Arts Centre' },
+            'Lonsdale St (South)': { $avg: '$Lonsdale St (South)' },
+            'Lygon St (West)': { $avg: '$Lygon St (West)' },
+            'Flinders St-Spring St (West)': { $avg: '$Flinders St-Spring St (West)' },
+            'Flinders St-Spark Lane': { $avg: '$Flinders St-Spark Lane' },
+            'Alfred Place': { $avg: '$Alfred Place' },
+            'Queen Street (West)': { $avg: '$Queen Street (West)' },
+            'Lygon Street (East)': { $avg: '$Lygon Street (East)' },
+            'Flinders St-Swanston St (West)': { $avg: '$Flinders St-Swanston St (West)' },
+            'Spring St-Lonsdale St (South)': { $avg: '$Spring St-Lonsdale St (South)' },
+            'City Square': { $avg: '$City Square' },
+            'St-Kilda-Alexandra Gardens': { $avg: '$St-Kilda-Alexandra Gardens' },
+            'Grattan St-Swanston St (West)': { $avg: '$Grattan St-Swanston St (West)' },
+            'Monash Rd-Swanston St (West)': { $avg: '$Monash Rd-Swanston St (West)' },
+            'Tin Alley-Swanston St (West)': { $avg: '$Tin Alley-Swanston St (West)' },
+            'Southbank': { $avg: '$Southbank' }
+        }
+    },
+    {
+        $sort: {				// Sort by year then month and then day to start from 1/1/2017
+            "_id.year": 1,
+            "_id.month": 1,
+            "_id.day": 1,
+
+        }
+    }
+
+]).forEach(function(obj) {
+    // here each street has its own average, I have to compare each field within row
+    // Logic for sorting 
+
+    var averages = [];
+    for (var prop in obj) {
+        if (prop != "_id") {
+            averages.push({ street: prop, avg: obj[prop] })
+        }
+    }
+    averages.sort(function(a, b) {
+        if (a.avg > b.avg) return -1;
+        if (b.avg > a.avg) return 1;
+
+        return 0;
+    });
+    result.push({
+        date: obj._id.month + '/' + obj._id.day + '/' + obj._id.year,
+        street: averages[0].street, // Picked the first one
+        average: averages[0].avg.toFixed(2)
+    })
+})
+
+print(result);
+ ```
 
 
 
 
-
-
-# App
-## Cómo inicializar
-Run `npm install`
-
-Para ejecutarlo en tu móvil (conectador por USB), ejecutar:
-Run `ionic cordova run android`
-
-
-Para ver si él móvil está conectado, ejecutar
-Run `adb devices`
 
