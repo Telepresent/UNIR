@@ -116,15 +116,15 @@ var result = [];
 
 // Started aggregation pipeline
 db.personas.aggregate([
-    {							// match clause for hour check greater than equal to 10 and less than 21
+    {							// Utilizamos el comando match para buscar las horas mayores a 10 y menores a 21
         $match: {
             "Hour": { '$gte': 10, '$lte': 21 }
         }
     },
     {
         $group: {
-            "_id": { day: '$date.day', month: "$date.month", year: '$date.year' }, // group data by day,month and year
-            'State Library': { $avg: '$State Library' },			   // Add each street average value	
+            "_id": { day: '$date.day', month: "$date.month", year: '$date.year' }, // Agrupamos por día, mes y año
+            'State Library': { $avg: '$State Library' },			   // Añadimos el valor medio de peatones para cada zona	
             'Collins Place (South)': { $avg: '$Collins Place (South)' },
             'Collins Place (North)': { $avg: '$Collins Place (North)' },
             'Flagstaff Station': { $avg: '$Flagstaff Station' },
@@ -170,7 +170,7 @@ db.personas.aggregate([
         }
     },
     {
-        $sort: {				// Sort by year then month and then day to start from 1/1/2017
+        $sort: {				// Ordenar por año, mes y día para empezar por el  1/1/2017
             "_id.year": 1,
             "_id.month": 1,
             "_id.day": 1,
@@ -179,8 +179,8 @@ db.personas.aggregate([
     }
 
 ]).forEach(function(obj) {
-    // here each street has its own average, I have to compare each field within row
-    // Logic for sorting 
+    // Cada zoan tiene su media, tenemos que comparar cada campo de la fila 
+    // Logica para ordenar
 
     var averages = [];
     for (var prop in obj) {
@@ -196,7 +196,7 @@ db.personas.aggregate([
     });
     result.push({
         date: obj._id.month + '/' + obj._id.day + '/' + obj._id.year,
-        street: averages[0].street, // Picked the first one
+        street: averages[0].street, // Elegimos el primero (el más alto)
         average: averages[0].avg.toFixed(2)
     })
 })
