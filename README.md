@@ -208,7 +208,8 @@ print(result);
  Se proporciona la salida en el archivo “Respuesta.csv”. Si analizamos los datos, nos damos cuenta de que en 193 días del año, la zona en la que transitan más personas es SOUTHBANK. Por tanto, es esta la zona en la que por mayor flujo de personas, situaríamos nuestro negocio.  Para ver los datos de manera gráfica y ver que SOUTHBANK se corresponde con la zona más bulliciosa de negocios de Melbourne, he creado el siguiente mapa que podéis consultar pulsando en el enlace. 
  
 # Query 1 Buscar la zona en la que colocaríamos una tienda. 
-La mejor zona es SOUTHBANK. https://public.tableau.com/views/Flujopersonas/Dashboard1?:language=es&:display_count=y&publish=yes?:showVizHome=no#1
+
+Como se ve de manera gráfica, la mejor zona es SOUTHBANK. Para representar la información de "Resultado.csv" se ha empleado la herramienta TABLEAU y MAPBOX para la visualización del mapa.  https://public.tableau.com/views/Flujopersonas/Dashboard1?:language=es&:display_count=y&publish=yes?:showVizHome=no#1
 
 [![MELBOURNE](images/solucion.jpg)](https://public.tableau.com/views/Flujopersonas/Dashboard1?:language=es&:display_count=y&publish=yes?:showVizHome=no#1)
 
