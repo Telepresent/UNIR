@@ -27,7 +27,7 @@ El flujo de personas en la ciudad es objeto de un creciente interés por parte d
 
 1.	En primer lugar tenemos que obtener los datos de flujo de personas con los que vamos a trabajar. Son los datos de enero a diciembre de 2017 y se pueden descargar de la web de la ciudad de Melbourne http://www.pedestrian.melbourne.vic.gov.au/
 
-2.	Es necesario importar los documentos a MongoDB. Si tenemos 12 archivos .csv, tendríamos que ejecutar 12 veces el comendo. Para facilitar la tarea, he creado un único archivo con los datos de los 12 meses. 
+2.	Es necesario importar los documentos a MongoDB. Si tenemos 12 archivos .csv, tendríamos que ejecutar 12 veces el comendo. Para facilitar la tarea, he creado un único archivo con los datos de los 12 meses. "Datos año completo 2017.csv"
 
 El comando a ejecutar para importar el documento .csv es: 
 
@@ -107,8 +107,8 @@ db.personas.find({})
 
 ```mongoimport –db test –collection personas < output.json```
 
-5.	Ahora ya temenos los datos ordenados en MongoDB y podemos lanzar una Query que nos muestre para cada día, la calle en la que ha habido más peatones entre las 10:00h y las 21:00h. Se proporciona la salida en el archivo “Respuesta.csv”. Si analizamos los datos, nos damos cuenta de que en 193 días del año, la zona en la que transitan más personas es SOUTHBANK. Por tanto, es esta la zona en la que por mayor flujo de personas, situaríamos nuestro negocio.  Para ver los datos de manera gráfica y ver que SOUTHBANK se corresponde con la zona más bulliciosa de negocios de Melbourne, he creado el siguiente mapa que podéis consultar pulsando en el enlace. 
-
+5.	Ahora ya temenos los datos ordenados en MongoDB y podemos lanzar una Query que nos muestre para cada día, la calle en la que ha habido más peatones entre las 10:00h y las 21:00h. 
+La Query se ha realizado con la herramienta de gestión visual "NoSQLBooster for MongoDB".
 
  ```Javascript
 // variable that will hold final result
@@ -202,7 +202,11 @@ db.personas.aggregate([
 })
 
 print(result);
+
  ```
+ 
+ Se proporciona la salida en el archivo “Respuesta.csv”. Si analizamos los datos, nos damos cuenta de que en 193 días del año, la zona en la que transitan más personas es SOUTHBANK. Por tanto, es esta la zona en la que por mayor flujo de personas, situaríamos nuestro negocio.  Para ver los datos de manera gráfica y ver que SOUTHBANK se corresponde con la zona más bulliciosa de negocios de Melbourne, he creado el siguiente mapa que podéis consultar pulsando en el enlace. 
+ 
 # Query 1 Buscar la zona en la que colocaríamos una tienda. 
 La mejor zona es SOUTHBANK. https://public.tableau.com/views/Flujopersonas/Dashboard1?:language=es&:display_count=y&publish=yes?:showVizHome=no#1
 
