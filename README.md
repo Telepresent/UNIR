@@ -10,7 +10,7 @@ El flujo de personas en la ciudad es objeto de un creciente interés por parte d
 
 * El sistema de monitorización de flujo de personas, se inicia como un proyecto piloto en el centro de la ciudad y se espera escalarlo a toda la ciudad (4,9 millones de habitantes). Explica las ventajas o desventajas de utilizar una base de datos SQL/NoSQL para ello. 
 
-* Importa los datos .csv a MongoDB (puedes utilizar la interfaz gráfica Studio 3T que veremos en clase).
+* Importa los datos .csv a MongoDB.
 
 * Lanza las queries necesarias para determinar:
 
@@ -27,7 +27,7 @@ El flujo de personas en la ciudad es objeto de un creciente interés por parte d
 
 1.	En primer lugar tenemos que obtener los datos de flujo de personas con los que vamos a trabajar. Son los datos de enero a diciembre de 2017 y se pueden descargar de la web de la ciudad de Melbourne http://www.pedestrian.melbourne.vic.gov.au/
 
-2.	Es necesario importar los documentos a MongoDB. Si tenemos 12 archivos .csv, tendríamos que ejecutar 12 veces el comendo. Para facilitar la tarea, he creado un único archivo, denominado “Result.csv” con los datos de los 12 meses. 
+2.	Es necesario importar los documentos a MongoDB. Si tenemos 12 archivos .csv, tendríamos que ejecutar 12 veces el comendo. Para facilitar la tarea, he creado un único archivo con los datos de los 12 meses. 
 
 El comando a ejecutar para importar el documento .csv es: 
 
