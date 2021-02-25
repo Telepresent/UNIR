@@ -311,5 +311,5 @@ print(result);
  El resultado de la Query se encuentra en el archivo "respuesta2.csv"
  
  
-[![MELBOURNE](images/Minimo.jpg)](https://public.tableau.com/views/Flujopersonas/Dashboard1?:language=es&:display_count=y&publish=yes?:showVizHome=no#1)
+[![MELBOURNE](images/Minimo.jpg)](https://public.tableau.com/views/Flujodepersonasmnimo/Hoja1?:language=es&:display_count=y&publish=yes?:showVizHome=no#1)
 
