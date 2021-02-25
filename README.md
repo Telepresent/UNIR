@@ -299,8 +299,8 @@ db.personas.aggregate([
     });
     result.push({
         date: obj._id.month + '/' + obj._id.day + '/' + obj._id.year,
-        street: averages[4].street, // Cogemos la quinta
-        average: averages[4].avg.toFixed(2)
+        street: averages[34].street, // Cogemos la quinta
+        average: averages[34].avg.toFixed(2)
     })
 })
 
