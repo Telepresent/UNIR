@@ -214,4 +214,95 @@ Como se ve de manera gráfica, la mejor zona es SOUTHBANK. Para representar la i
 [![MELBOURNE](images/solucion.jpg)](https://public.tableau.com/views/Flujopersonas/Dashboard1?:language=es&:display_count=y&publish=yes?:showVizHome=no#1)
 
 
+# Query 2 Buscar la zona más degradada donde menos flujo de personas hay 
 
+
+ ```
+// variable that will hold final result
+var result = []; 
+
+// Started aggregation pipeline
+db.personas.aggregate([   
+    {
+        $group: {
+            "_id": { day: '$date.day', month: "$date.month", year: '$date.year' }, // group data by day,month and year
+            'State Library': { $avg: '$State Library' },			   // Add each street average value	
+            'Collins Place (South)': { $avg: '$Collins Place (South)' },
+            'Collins Place (North)': { $avg: '$Collins Place (North)' },
+            'Flagstaff Station': { $avg: '$Flagstaff Station' },
+            'Melbourne Central': { $avg: '$Melbourne Central' },
+            'Town Hall (West)': { $avg: '$Town Hall (West)' },
+            'Bourke Street Mall (North)': { $avg: '$Bourke Street Mall (North)' },
+            'Bourke Street Mall (South)': { $avg: '$Bourke Street Mall (South)' },
+            'Australia on Collins': { $avg: '$Australia on Collins' },
+            'Southern Cross Station': { $avg: '$Southern Cross Station' },
+            'Victoria Point': { $avg: '$Victoria Point' },
+            'New Quay': { $avg: '$New Quay' },
+            'Waterfront City': { $avg: '$Waterfront City' },
+            'Webb Bridge': { $avg: '$Webb Bridge' },
+            'Princes Bridge': { $avg: '$Princes Bridge' },
+            'Flinders St Station Underpass': { $avg: '$Flinders St Station Underpass' },
+            'Sandridge Bridge': { $avg: '$Sandridge Bridge' },
+            'Birrarung Marr': { $avg: '$Birrarung Marr' },
+            'QV Market-Elizabeth (West)': { $avg: '$QV Market-Elizabeth (West)' },
+            'Flinders St-Elizabeth St (East)': { $avg: '$Flinders St-Elizabeth St (East)' },
+            'Spencer St-Collins St (North)': { $avg: '$Spencer St-Collins St (North)' },
+            'Spencer St-Collins St (South)': { $avg: '$Spencer St-Collins St (South)' },
+            'Bourke St-Russell St (West)': { $avg: '$Bourke St-Russell St (West)' },
+            'Convention/Exhibition Centre': { $avg: '$Convention/Exhibition Centre' },
+            'Chinatown-Swanston St (North)': { $avg: '$Chinatown-Swanston St (North)' },
+            'Chinatown-Lt Bourke St (South)': { $avg: '$Chinatown-Lt Bourke St (South)' },
+            'QV Market-Peel St': { $avg: '$QV Market-Peel St' },
+            'Vic Arts Centre': { $avg: '$Vic Arts Centre' },
+            'Lonsdale St (South)': { $avg: '$Lonsdale St (South)' },
+            'Lygon St (West)': { $avg: '$Lygon St (West)' },
+            'Flinders St-Spring St (West)': { $avg: '$Flinders St-Spring St (West)' },
+            'Flinders St-Spark Lane': { $avg: '$Flinders St-Spark Lane' },
+            'Alfred Place': { $avg: '$Alfred Place' },
+            'Queen Street (West)': { $avg: '$Queen Street (West)' },
+            'Lygon Street (East)': { $avg: '$Lygon Street (East)' },
+            'Flinders St-Swanston St (West)': { $avg: '$Flinders St-Swanston St (West)' },
+            'Spring St-Lonsdale St (South)': { $avg: '$Spring St-Lonsdale St (South)' },
+            'City Square': { $avg: '$City Square' },
+            'St-Kilda-Alexandra Gardens': { $avg: '$St-Kilda-Alexandra Gardens' },
+            'Grattan St-Swanston St (West)': { $avg: '$Grattan St-Swanston St (West)' },
+            'Monash Rd-Swanston St (West)': { $avg: '$Monash Rd-Swanston St (West)' },
+            'Tin Alley-Swanston St (West)': { $avg: '$Tin Alley-Swanston St (West)' },
+            'Southbank': { $avg: '$Southbank' }
+        }
+    },
+    {
+        $sort: {				// Sort by year then month and then day to start from 1/1/2017
+            "_id.year": 1,
+            "_id.month": 1,
+            "_id.day": 1,
+
+        }
+    }
+
+]).forEach(function(obj) {
+    // here each street has its own average, I have to compare each field within row
+    // Logic for sorting 
+
+    var averages = [];
+    for (var prop in obj) {
+        if (prop != "_id") {
+            averages.push({ street: prop, avg: obj[prop] })
+        }
+    }
+    averages.sort(function(a, b) {
+        if (a.avg > b.avg) return -1;
+        if (b.avg > a.avg) return 1;
+
+        return 0;
+    });
+    result.push({
+        date: obj._id.month + '/' + obj._id.day + '/' + obj._id.year,
+        street: averages[4].street, // Picked the fifth one
+        average: averages[4].avg.toFixed(2)
+    })
+})
+
+print(result);
+
+ ```
