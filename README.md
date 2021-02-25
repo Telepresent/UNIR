@@ -307,3 +307,9 @@ db.personas.aggregate([
 print(result);
 
  ```
+ 
+ El resultado de la Query se encuentra en el archivo "respuesta2.csv"
+ 
+ 
+[![MELBOURNE](images/minimo.jpg)](https://public.tableau.com/views/Flujopersonas/Dashboard1?:language=es&:display_count=y&publish=yes?:showVizHome=no#1)
+
