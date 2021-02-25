@@ -216,16 +216,17 @@ Como se ve de manera gráfica, la mejor zona es SOUTHBANK. Para representar la i
 
 # Query 2 Buscar la zona más degradada donde menos flujo de personas hay 
 
+En este caso, la Query es más sencilla y no hace falta filtrar por horas. 
 
  ```
-// variable that will hold final result
+// Variable que almacenará el resultado final
 var result = []; 
 
-// Started aggregation pipeline
+// Utilizamos el aggregation pipeline
 db.personas.aggregate([   
     {
         $group: {
-            "_id": { day: '$date.day', month: "$date.month", year: '$date.year' }, // group data by day,month and year
+            "_id": { day: '$date.day', month: "$date.month", year: '$date.year' }, // agrupamos los datos por día, mes y año
             'State Library': { $avg: '$State Library' },			   // Add each street average value	
             'Collins Place (South)': { $avg: '$Collins Place (South)' },
             'Collins Place (North)': { $avg: '$Collins Place (North)' },
@@ -272,7 +273,7 @@ db.personas.aggregate([
         }
     },
     {
-        $sort: {				// Sort by year then month and then day to start from 1/1/2017
+        $sort: {				// Ordenar los datos por año, mes, día para empezar desde el 1/1/2017
             "_id.year": 1,
             "_id.month": 1,
             "_id.day": 1,
@@ -281,8 +282,8 @@ db.personas.aggregate([
     }
 
 ]).forEach(function(obj) {
-    // here each street has its own average, I have to compare each field within row
-    // Logic for sorting 
+    // Cada calle tiene su propia media, tenemos que comparar los campos de cada fila
+    // Lógica para ordenar los datos 
 
     var averages = [];
     for (var prop in obj) {
@@ -298,7 +299,7 @@ db.personas.aggregate([
     });
     result.push({
         date: obj._id.month + '/' + obj._id.day + '/' + obj._id.year,
-        street: averages[4].street, // Picked the fifth one
+        street: averages[4].street, // Cogemos la quinta
         average: averages[4].avg.toFixed(2)
     })
 })
